@@ -1,0 +1,57 @@
+#!/usr/bin/python3
+import random
+import sys
+
+
+def dice():
+    # emulate single dice throw
+    return random.randint(1, 6)
+
+
+def count_scores(throw_result):
+    if sorted(throw_result) == [1, 2, 3, 4, 5]:
+        return 150
+    else:
+        return throw_result.count(1) * 10 + throw_result.count(5) * 5
+
+
+def trow_dices(amount) -> list:
+    # trowing given amount of dice
+    return [dice() for _ in range(amount)]
+
+
+def get_arguments():
+    if len(sys.argv) != 4:
+        sys.exit(1)
+
+    _, trow_amount, min_dice, max_dice = sys.argv
+
+    try:
+        trow_amount = int(trow_amount)
+        min_dice = int(min_dice)
+        max_dice = int(max_dice)
+    except ValueError:
+        sys.exit(1)
+
+    if trow_amount < 0:
+        sys.exit(1)
+
+    if (0 >= min_dice) or (0 >= max_dice):
+        sys.exit(1)
+
+    if (5 < min_dice) or (5 < max_dice):
+        sys.exit(1)
+
+    if min_dice > max_dice:
+        sys.exit(1)
+
+    return trow_amount, min_dice, max_dice
+
+
+if __name__ == "__main__":
+    args = get_arguments()
+    trow_amount, min_dice, max_dice = args
+
+    for throw in range(trow_amount):
+        result = trow_dices(random.randint(min_dice, max_dice))
+        print(" ".join([str(el) for el in result]), "=", count_scores(result))
