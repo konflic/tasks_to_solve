@@ -1,4 +1,5 @@
 def stupid_merge(*iterables):
+    """Simple and ineffective realization."""
     merged = []
 
     for i in iterables:
@@ -10,7 +11,8 @@ def stupid_merge(*iterables):
         yield el
 
 
-def merge(*iterables):
+def my_merge(*iterables):
+    """Works only with iterators because of next()."""
     iterables = list(iterables)
 
     while True:
@@ -25,31 +27,20 @@ def merge(*iterables):
                 del iterables[i]
 
         res.sort()
-
         for el in res:
             yield el
 
 
-if __name__ == "__main__":
+def generate_iterables(*lists):
+    """Creating list of iterators for tests."""
+    prepared1, prepared2 = [], []
 
-    def it1():
-        for el in [1, 5, 9, 100]:
-            yield el
+    for list in lists:
+        def _it():
+            for el in list:
+                yield el
 
+        prepared1.append(_it())
+        prepared2.append(_it())
 
-    def it2():
-        for el in [200, 500]:
-            yield el
-
-
-    def it3():
-        for el in [1, 6, 10, 11, 20]:
-            yield el
-
-
-    i1 = it1()
-    i2 = it2()
-    i3 = it3()
-
-    for el in stupid_merge(i1, i2, i3):
-        print(el, end=" ")
+    return prepared1, prepared2

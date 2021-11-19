@@ -15,6 +15,7 @@ def parse_results(results):
 
 
 def count_scores(throw_result):
+    """Verification of counting scores."""
     throw_result = [int(el) for el in throw_result]
 
     if sorted(throw_result) == [1, 2, 3, 4, 5]:
@@ -24,7 +25,8 @@ def count_scores(throw_result):
 
 
 def _my_cool_soft(path_to_soft):
-    full_path = path.join(getcwd(), f"reference/{path_to_soft}")
+    """Wrap around binary files to run tests against."""
+    full_path = f"{path_to_soft}"
 
     def wrapper(throws, min_d, max_d):
         try:
@@ -35,7 +37,3 @@ def _my_cool_soft(path_to_soft):
             return "Error"
 
     return wrapper
-
-
-if __name__ == "__main__":
-    pass

@@ -1,4 +1,6 @@
-Write a function, which accepts time delta specifier as a string argument and returns time interval in seconds as an integer. 
+## Description
+
+```Write a function, which accepts time delta specifier as a string argument and returns time interval in seconds as an integer. 
 
 Supported time units: s – second, m – minute, h – hour, d – day, with seconds being default unit and 1 being default value. 
 
@@ -21,3 +23,9 @@ s -> 1
 1y -> Exception raised
 
 <empty string> -> Exception raised
+```
+
+
+## Resolution.
+
+Program implemented according to tasks in solution.py.
